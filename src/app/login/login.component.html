@@ -1,0 +1,33 @@
+
+<div class="container">
+  <mat-card  style="margin-top: 3em; ">
+    <mat-card-title>
+      <mat-icon style="font-size: 60px;margin-bottom: 0.5em;" aria-hidden="true">account_circle</mat-icon>
+    </mat-card-title>
+    <mat-card-header><h3><b>Login</b></h3></mat-card-header>
+    <mat-card-content>
+    <form >
+      <p>
+        <mat-form-field>
+          <input type="text" matInput placeholder="Username" formControlName="nickname">
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field>
+          <input type="password" matInput placeholder="Password" formControlName="password">
+        </mat-form-field>
+      </p>
+
+
+
+      <div class="button">
+        <button type="submit" mat-raised-button color="accent" >Log in</button>
+      </div>
+
+      <a href="/register">You don't have an account?</a>
+    </form>
+
+    </mat-card-content>
+  </mat-card>
+</div>
