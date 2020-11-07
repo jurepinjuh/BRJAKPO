@@ -5,10 +5,15 @@
     </mat-card-title>
     <mat-card-header><h3><b>Register</b></h3></mat-card-header>
     <mat-card-content>
-    <form >
+    <form [formGroup]="form" (ngSubmit)="Register(form.value)">
       <p>
         <mat-form-field>
-          <input type="text" matInput placeholder="Username" formControlName="nickname">
+          <input type="text" matInput placeholder="Username" formControlName="username">
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <input type="email" matInput placeholder="Email" formControlName="email">
         </mat-form-field>
       </p>
 
@@ -18,10 +23,8 @@
         </mat-form-field>
       </p>
 
-
-
       <div class="button">
-        <button type="submit" mat-raised-button color="accent" >Register</button>
+        <button type="submit" mat-raised-button color="accent" [disabled]="!form.valid" >Register</button>
       </div>
       <a href="">Already have an account?</a>
     </form>

@@ -14,9 +14,8 @@ mat-card-content,
 mat-card-header {
   display: flex;
   justify-content: center;
+  
 }
-
-
 
 .button {
   display: flex;

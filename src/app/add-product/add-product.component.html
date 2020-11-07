@@ -1,0 +1,81 @@
+<div class="container">
+    <mat-card  style="margin-top: 3em; ">
+      <mat-card-title>
+        <div class="product">
+            <mat-card  class="mat-elevation-z2" style="padding: 0px;">
+        
+             <mat-card-content>
+              <img fxFlex="0 100 100%" class="productImage"   src="data:image/jpg;base64,{{form.controls['imagepath'].value}}">
+        
+             </mat-card-content>
+             <mat-card-subtitle>
+              <b class="sneakerName">{{form.controls['name'].value}}</b>
+              <div class="price"> {{form.controls['price'].value}}$</div>
+        
+             </mat-card-subtitle>
+            
+            </mat-card>
+          </div>
+          
+      </mat-card-title>
+     
+      <mat-card-content>
+       <div style="display: block;">
+      <form [formGroup]="form" >
+        
+        <div>
+            <button  class="float-right" color="primary" mat-raised-button (click)="fileInput.click()">Choose picture</button>
+            <input hidden (change)="changeListener($event)" accept="image/*" #fileInput type="file">
+            <input hidden formControlName="imagepath" placeholder="Naziv...">
+        </div>
+          <mat-form-field>
+            <input type="text" matInput placeholder="Article name" formControlName="name">
+          </mat-form-field>
+        
+        
+            <mat-form-field appearance="outline" >
+                <mat-label>Description</mat-label>
+                <textarea matInput rows="5" formControlName="description"></textarea>
+              </mat-form-field>
+        
+             
+            <mat-form-field>
+              <input type="text" matInput placeholder="Price" type="number" formControlName="price">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Brand</mat-label>
+                <mat-select>
+                  <mat-option formControlName="brand" *ngFor="let brand of brands" [value]="brand.value">
+                    {{brand.viewValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                <mat-label>Category</mat-label>
+                <mat-select>
+                  <mat-option formControlName="category" *ngFor="let category of categories" [value]="category.value">
+                    {{category.viewValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                <mat-label>Gender</mat-label>
+                <mat-select>
+                  <mat-option formControlName="gender" *ngFor="let gender of genders" [value]="gender.value">
+                    {{gender.viewValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+          
+  
+        <div class="button">
+          <button type="submit" mat-raised-button color="accent" [disabled]="!form.valid" >Add</button>
+        </div>
+  
+       
+      </form>
+    </div>
+  
+      </mat-card-content>
+    </mat-card>
+  </div>

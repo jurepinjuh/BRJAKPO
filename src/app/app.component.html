@@ -6,6 +6,9 @@
     <span class="example-spacer"></span>
     <div  class="toolbarIcons">
       <button *ngIf="this.sideNavService.cartVisible==true" mat-icon-button class="example-icon favorite-icon" >
+        <mat-icon   matBadgeColor="accent">account_circle</mat-icon>
+      </button>
+      <button *ngIf="this.sideNavService.cartVisible==true" mat-icon-button class="example-icon favorite-icon" >
         <mat-icon  matBadge="3" matBadgeColor="accent">shopping_cart</mat-icon>
       </button>
     </div>

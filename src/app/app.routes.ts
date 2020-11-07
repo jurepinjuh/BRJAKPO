@@ -6,6 +6,7 @@ import { RegisterComponent } from './register/register.component';
 import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ProductComponent } from './product/product.component';
+import { AddProductComponent } from './add-product/add-product.component';
 export const routes: Routes = [
   {
     path: '',
@@ -30,5 +31,10 @@ export const routes: Routes = [
   {
     path: 'product',
     component: ProductComponent
+  },
+  {
+    path:'addProduct',
+    component:AddProductComponent
   }
+  
 ]

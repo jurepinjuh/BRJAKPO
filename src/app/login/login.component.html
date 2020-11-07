@@ -6,10 +6,10 @@
     </mat-card-title>
     <mat-card-header><h3><b>Login</b></h3></mat-card-header>
     <mat-card-content>
-    <form >
+    <form [formGroup]="form" (ngSubmit)="Login(form.value)" >
       <p>
         <mat-form-field>
-          <input type="text" matInput placeholder="Username" formControlName="nickname">
+          <input type="text" matInput placeholder="Username" formControlName="username">
         </mat-form-field>
       </p>
 
@@ -19,10 +19,8 @@
         </mat-form-field>
       </p>
 
-
-
       <div class="button">
-        <button type="submit" mat-raised-button color="accent" >Log in</button>
+        <button type="submit" mat-raised-button color="accent" [disabled]="!form.valid" >Log in</button>
       </div>
 
       <a href="/register">You don't have an account?</a>

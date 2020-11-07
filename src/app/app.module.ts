@@ -1,9 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {HttpClientModule} from '@angular/common/http' 
+
 import {
     MatToolbarModule,
     MatSidenavModule,
@@ -33,6 +35,7 @@ import { RegisterComponent } from './register/register.component';
 import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ProductComponent } from './product/product.component';
+import { AddProductComponent } from './add-product/add-product.component';
 
 
 @NgModule({
@@ -44,9 +47,11 @@ import { ProductComponent } from './product/product.component';
     CartComponent,
     CheckoutComponent,
     ProductComponent,
+    AddProductComponent,
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     NoopAnimationsModule,
     MatToolbarModule,
@@ -65,7 +70,9 @@ import { ProductComponent } from './product/product.component';
     CarouselModule,
     NumberPickerModule,
     MatStepperModule,
-    MatSelectModule
+    MatSelectModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
