@@ -7,13 +7,14 @@ import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ProductComponent } from './product/product.component';
 import { AddProductComponent } from './add-product/add-product.component';
+import { AuthGuardService } from './Services/auth-guard.service';
 export const routes: Routes = [
   {
-    path: '',
+    path: 'login',
     component: LoginComponent
   },
   {
-    path: 'home',
+    path: '',
     component: HomeComponent
   },
   {
@@ -26,7 +27,9 @@ export const routes: Routes = [
   },
   {
     path: 'checkout',
-    component: CheckoutComponent
+    component: CheckoutComponent,
+    canActivate:[AuthGuardService],
+    data:{role:'USER'}
   },
   {
     path: 'product',
@@ -34,7 +37,9 @@ export const routes: Routes = [
   },
   {
     path:'addProduct',
-    component:AddProductComponent
+    component:AddProductComponent,
+    canActivate:[AuthGuardService],
+    data:{role:'ADMIN'}
   }
   
 ]

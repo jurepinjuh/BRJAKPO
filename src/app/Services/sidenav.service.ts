@@ -6,14 +6,14 @@ import { Injectable } from '@angular/core';
 export class SidenavService {
 
   constructor() { }
-   isVisible = true;
-   cartVisible = true;
+  isVisible = true;
+  cartVisible = true;
 
-  public  setVisible(visible: boolean) {
+  public setVisible(visible: boolean) {
     this.isVisible = visible;
   }
 
-  public  setCartVisible(visible: boolean) {
+  public setCartVisible(visible: boolean) {
     this.cartVisible = visible;
   }
 }

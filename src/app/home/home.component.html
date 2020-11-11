@@ -3,79 +3,36 @@
     <slide style="height:inherit;">
       <img src="https://live.staticflickr.com/5575/14572774238_276ac375a0_b.jpg" alt="first slide" style="display: block; width: 100%;">
     </slide>
-    <slide>
-      <img src="https://adequatechic.com/wp-content/uploads/2018/12/NIKE-BANNERS-1200X300-1024x256-1024x256.jpg" alt="second slide" style="display: block; width: 100%;">
-    </slide>
+  
     <slide>
       <img src="https://www.passionforsavings.com/content/uploads/2019/07/School-Supply-Deals-6.jpg" alt="third slide" style="display: block; width: 100%;">
     </slide>
   </carousel>
 </div>
-<div class="product-wrapper" fxLayout="row wrap" fxLayoutGap="24px grid">
-  <div class="product" fxFlex.lg="20%" fxFlex.xl="20%" fxflex.xs="50%" fxFlex.md="33%" fxflex.fxFlex.sm="50%">
+
+<div *ngIf="articles" class="product-wrapper" fxLayout="row wrap" fxLayoutGap="24px grid">
+  <div *ngFor="let product of articles" class="product" fxFlex.lg="25%" fxFlex.xl="25%" fxflex.xs="50%" fxFlex.md="33%" fxflex.fxFlex.sm="50%">
     <mat-card  class="mat-elevation-z2" style="padding: 0px;">
 
      <mat-card-content>
-      <img fxFlex="0 100 100%" class="productImage" src="https://i.pinimg.com/originals/39/00/58/3900587d8a0d9ecb1a014e656e86b623.jpg">
+      <img fxFlex="0 100 100%" class="productImage" src="data:image/jpg;base64,{{product.imagePath}}">
 
      </mat-card-content>
      <mat-card-subtitle>
-      <b class="sneakerName">Nike Air Force 1</b>
-      <div class="price"> 320$</div>
+      <b class="sneakerName">{{product.name}}</b>
+      <div class="price"> {{product.price}}$</div>
 
      </mat-card-subtitle>
      <mat-card-actions >
        <div fxFlex></div>
-        <button color="primary" mat-icon-button>
+        <button (click)="addToCart(product)" color="primary" mat-icon-button>
           <mat-icon >add_shopping_cart</mat-icon>
         </button>
 
      </mat-card-actions>
     </mat-card>
   </div>
-  <div class="product" fxFlex.lg="20%" fxFlex.xl="20%" fxflex.xs="50%" fxFlex.md="33%" fxflex.fxFlex.sm="50%">
-    <mat-card  class="mat-elevation-z2" style="padding: 0px;">
-
-     <mat-card-content>
-      <img fxFlex="0 100 100%" class="productImage"  src="https://c.static-nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/skwgyqrbfzhu6uyeh0gg/air-max-270-shoe-2V5C4p.jpg">
-
-     </mat-card-content>
-     <mat-card-subtitle>
-      <b class="sneakerName">Nike Air Force 1</b>
-      <div class="price"> 320$</div>
-
-     </mat-card-subtitle>
-     <mat-card-actions >
-       <div fxFlex></div>
-        <button color="primary" mat-icon-button>
-          <mat-icon >add_shopping_cart</mat-icon>
-        </button>
-
-     </mat-card-actions>
-    </mat-card>
-  </div>
-  <div class="product" fxFlex.lg="20%" fxFlex.xl="20%" fxflex.xs="50%" fxFlex.md="33%" fxflex.fxFlex.sm="50%">
-    <mat-card  class="mat-elevation-z2" style="padding: 0px;">
-
-     <mat-card-content>
-      <img fxFlex="0 100 100%" class="productImage"  src="https://lh3.googleusercontent.com/proxy/NSig6TeQQUEeStXJGC91TRr99dvUaAkHxmBspHyguI5B27hD62_X86kxcwtdky1ok1vAXEnQEhVK7YVUahjXhv-x1CnEhucd-dHl1uMQyYbz528">
-
-     </mat-card-content>
-     <mat-card-subtitle>
-      <b class="sneakerName">Nike Air Force 1</b>
-      <div class="price"> 320$</div>
-
-     </mat-card-subtitle>
-     <mat-card-actions >
-       <div fxFlex></div>
-        <button color="primary" mat-icon-button>
-          <mat-icon >add_shopping_cart</mat-icon>
-        </button>
-
-     </mat-card-actions>
-    </mat-card>
-  </div>
-
+  
 
 
 </div>

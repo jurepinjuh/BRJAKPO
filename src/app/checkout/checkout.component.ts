@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Item } from '../Models/item';
+import { CartService } from '../Services/cart.service';
 import { SidenavService } from '../Services/sidenav.service';
 
 @Component({
@@ -12,8 +14,12 @@ export class CheckoutComponent implements OnInit {
   billingForm;
   deliveryForm;
   detailsForm;
-  constructor(private sideNavService: SidenavService,private formBuilder:FormBuilder) {
+  public items:Item[];
+  public total=0;
+  constructor(private sideNavService: SidenavService,private formBuilder:FormBuilder,public cartService:CartService) {
     sideNavService.setVisible(false);
+    this.items=this.cartService.getItems();
+    this.setTotalPrice();
    
     this.billingForm = this.formBuilder.group({
       name: ['', Validators.required],
@@ -38,6 +44,11 @@ export class CheckoutComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+  setTotalPrice(){
+    this.items.forEach(element => {
+      this.total=this.total+element.total;
+    });
   }
 
 }

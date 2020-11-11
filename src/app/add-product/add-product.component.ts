@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Brand } from '../Models/brand';
+import { Category } from '../Models/category';
+import { Gender } from '../Models/gender';
+import { CategoryService } from '../Services/category.service';
 import { SidenavService } from '../Services/sidenav.service';
 
 @Component({
@@ -11,22 +15,30 @@ export class AddProductComponent implements OnInit {
 
   form;
   image;
-  brands;
-  categories;
-  genders;
-  constructor(private sideNavService:SidenavService,private formBuilder:FormBuilder) {
-    this.sideNavService.setVisible(false);
-    this.sideNavService.setCartVisible(false);
-    this.form=this.formBuilder.group({
-      name:['',Validators.required],
-      price:['',Validators.required],
-      description:['',Validators.required],
-      imagepath:['',Validators.required],
-      brand:['',Validators.required],
-      category:['',Validators.required],
-      gender:['',Validators.required]
+  brands:Brand[];
+  categories:Category[];
+  genders:Gender[];
+  constructor(private sideNavService: SidenavService, private formBuilder: FormBuilder, private categoryService: CategoryService) {
+    this.categoryService.getBrands().subscribe(data=>{
+      this.brands=data;
     });
-   }
+    this.categoryService.getCategories().subscribe(data=>{
+      this.categories=data;
+    })
+    this.categoryService.getGenders().subscribe(data=>{
+      this.genders=data;
+    })
+
+    this.form = this.formBuilder.group({
+      name: ['', Validators.required],
+      price: ['', Validators.required],
+      description: ['', Validators.required],
+      imagepath: ['', Validators.required],
+      brand: ['', Validators.required],
+      category: ['', Validators.required],
+      gender: ['', Validators.required]
+    });
+  }
 
   ngOnInit() {
   }
@@ -38,10 +50,10 @@ export class AddProductComponent implements OnInit {
     const file: File = inputValue.files[0];
     const myReader: FileReader = new FileReader();
     if (file.size > 5242880) {
-    
+
       this.form.controls['imagepath'].setValue('');
     } else {
-      
+
       myReader.onloadend = (e) => {
         this.image = myReader.result;
         const array = this.image.split(',');

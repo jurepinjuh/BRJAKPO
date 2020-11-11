@@ -44,25 +44,25 @@
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Brand</mat-label>
-                <mat-select>
-                  <mat-option formControlName="brand" *ngFor="let brand of brands" [value]="brand.value">
-                    {{brand.viewValue}}
+                <mat-select formControlName="brand">
+                  <mat-option  *ngFor="let brand of brands" [value]="brand.id">
+                    {{brand.brandName}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
-              <mat-form-field appearance="fill">
+              <mat-form-field *ngIf="categories" appearance="fill">
                 <mat-label>Category</mat-label>
-                <mat-select>
-                  <mat-option formControlName="category" *ngFor="let category of categories" [value]="category.value">
-                    {{category.viewValue}}
+                <mat-select formControlName="category" > 
+                  <mat-option *ngFor="let category of categories" value="{{category.id}}">
+                    {{category.categoryName}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
               <mat-form-field appearance="fill">
                 <mat-label>Gender</mat-label>
-                <mat-select>
-                  <mat-option formControlName="gender" *ngFor="let gender of genders" [value]="gender.value">
-                    {{gender.viewValue}}
+                <mat-select formControlName="gender">
+                  <mat-option  *ngFor="let gender of genders" [value]="gender.id.toString()">
+                    {{gender.name}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>

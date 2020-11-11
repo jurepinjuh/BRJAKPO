@@ -103,21 +103,21 @@
   <!-- Heading -->
   <h4 class="d-flex justify-content-between align-items-center mb-3">
       <span >Your cart</span>
-      <span class="badge badge-secondary badge-pill" style="background-color: black;">2</span>
+      <span class="badge badge-secondary badge-pill" style="background-color: black;">{{this.cartService.getSize()}}</span>
   </h4>
 
   <!-- Cart -->
-      <li class="list-group-item d-flex justify-content-between lh-condensed">
+      <li *ngFor="let item of items" class="list-group-item d-flex justify-content-between lh-condensed">
           <div>
-              <h6 class="my-0">Nike AirForce 1</h6>
-              <small class="">Quantity:2</small>
+              <h6 class="my-0">{{item.article.name}}</h6>
+              <small class="">Quantity:{{item.quantity}}</small>
           </div>
-          <span class="price"> 320$</span>
+          <span class="price"> {{item.total}}$</span>
       </li>
 
   <li class="list-group-item d-flex justify-content-between">
       <span>Total (USD)</span>
-      <strong>$<span id="value"></span></strong>
+      <strong>${{total}}<span id="value"></span></strong>
   </li>
   <button [disabled]="!billingForm.valid||!deliveryForm.valid" class="btn btn-success mat-elevation-z5 payment">CHECKOUT</button>
   <!-- Cart -->

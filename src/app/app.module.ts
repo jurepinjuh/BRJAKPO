@@ -36,6 +36,8 @@ import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ProductComponent } from './product/product.component';
 import { AddProductComponent } from './add-product/add-product.component';
+import { CartService } from './Services/cart.service';
+import { UserService } from './Services/user.service';
 
 
 @NgModule({
@@ -74,7 +76,7 @@ import { AddProductComponent } from './add-product/add-product.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [CartService,UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

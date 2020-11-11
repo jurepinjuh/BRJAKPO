@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Item } from '../Models/item';
+import { CartService } from '../Services/cart.service';
 import { SidenavService } from '../Services/sidenav.service';
 
 @Component({
@@ -9,11 +11,18 @@ import { SidenavService } from '../Services/sidenav.service';
 export class CartComponent implements OnInit {
 
   cartValue = 1;
-  constructor(private sideNavService: SidenavService) {
+  items:Item[];
+  constructor(private sideNavService: SidenavService,private cartService:CartService) {
     this.sideNavService.setVisible(true);
+    this.items=cartService.getItems();
    }
 
   ngOnInit() {
+  }
+
+  delete(item){
+    
+    this.cartService.deleteItem(item);
   }
 
 }

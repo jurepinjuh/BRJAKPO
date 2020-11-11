@@ -1,15 +1,16 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <mat-toolbar color="primary" class="toolbar" style="position: fixed; top: 0;z-index: 999;box-shadow: 0 0 3px 3px rgba(0,0,0,0.3);">
 
-    <img class="logo" src="../assets/KIKCZLOGO.png">
+    <img [routerLink]="['']" class="logo" src="../assets/KIKCZLOGO.png">
 
     <span class="example-spacer"></span>
     <div  class="toolbarIcons">
-      <button *ngIf="this.sideNavService.cartVisible==true" mat-icon-button class="example-icon favorite-icon" >
+      <button *ngIf="this.sideNavService.cartVisible==true"[routerLink]="['/login']" mat-icon-button class="example-icon favorite-icon" >
+        <span>{{userService.GetCurrentUser()}}</span>
         <mat-icon   matBadgeColor="accent">account_circle</mat-icon>
       </button>
-      <button *ngIf="this.sideNavService.cartVisible==true" mat-icon-button class="example-icon favorite-icon" >
-        <mat-icon  matBadge="3" matBadgeColor="accent">shopping_cart</mat-icon>
+      <button *ngIf="this.sideNavService.cartVisible==true&&(this.userService.userRole=='USER'||!this.userService.userRole)" mat-icon-button class="example-icon favorite-icon" style="margin-left:5px;" >
+        <mat-icon [routerLink]="['/cart']"  matBadge="{{cartService.getSize()}}" matBadgeColor="accent">shopping_cart</mat-icon>
       </button>
     </div>
 
@@ -22,69 +23,89 @@
     style="position: fixed; top: 0;z-index: 999;">
     <mat-nav-list style="margin-top: 56px">
 
-
-      <mat-accordion>
-        <mat-expansion-panel class="sidenavAccord mat-elevation-z0">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              <mat-icon aria-hidden="false" aria-label="Početna" style="margin-right: 15px;">family_restroom</mat-icon>
-              <b>Gender</b>
-            </mat-panel-title>
-
-          </mat-expansion-panel-header>
-          <ul  style="list-style: none; padding:0">
-            <li>
-            <mat-checkbox color="primary">
-              <b>Male</b>
-            </mat-checkbox>
-            </li>
-            <li>
-              <mat-checkbox color="primary">
-                <b>Female</b>
+      <div *ngIf="!userService.userRole||userService.userRole=='USER'" class="filters">
+        <mat-accordion>
+          <mat-expansion-panel class="sidenavAccord mat-elevation-z0">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon aria-hidden="false" aria-label="Početna" style="margin-right: 15px;">family_restroom</mat-icon>
+                <b>Gender</b>
+              </mat-panel-title>
+  
+            </mat-expansion-panel-header>
+            <ul  style="list-style: none; padding:0">
+              <li *ngFor="let gender of genders">
+              <mat-checkbox  color="primary">
+                <b>{{gender.name}}</b>
               </mat-checkbox>
-            </li>
-          </ul>
-        </mat-expansion-panel>
-
-      </mat-accordion>
-
-      <mat-accordion>
-        <mat-expansion-panel class="sidenavAccord mat-elevation-z0">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              <mat-icon aria-hidden="false" aria-label="Početna" style="margin-right: 15px;">category</mat-icon>
-              <b>Type</b>
-            </mat-panel-title>
-
-          </mat-expansion-panel-header>
-          <ul>
-            <li>
-            <mat-checkbox>
-
-            </mat-checkbox>
-            </li>
-          </ul>
-        </mat-expansion-panel>
-
-      </mat-accordion>
-      <mat-accordion>
-        <mat-expansion-panel class="sidenavAccord mat-elevation-z0">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              <mat-icon aria-hidden="false" aria-label="Početna" style="margin-right: 15px;">verified</mat-icon>
-              <b>Brand</b>
-            </mat-panel-title>
-
-          </mat-expansion-panel-header>
-
-        </mat-expansion-panel>
-
-      </mat-accordion>
-
-
-      <div class="center">
-        <button style="width: 95%;padding: 0.7em;" mat-flat-button color="primary">FILTER</button>
+              </li>
+            
+            </ul>
+          </mat-expansion-panel>
+  
+        </mat-accordion>
+  
+        <mat-accordion>
+          <mat-expansion-panel class="sidenavAccord mat-elevation-z0">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon aria-hidden="false" aria-label="Početna" style="margin-right: 15px;">category</mat-icon>
+                <b>Type</b>
+              </mat-panel-title>
+  
+            </mat-expansion-panel-header>
+            <ul style="list-style: none; padding:0">
+              <li *ngFor="let category of categories">
+              <mat-checkbox>
+               <b>
+                {{category.categoryName}}
+               </b> 
+              </mat-checkbox>
+              </li>
+            </ul>
+          </mat-expansion-panel>
+  
+        </mat-accordion>
+        <mat-accordion>
+          <mat-expansion-panel  class="sidenavAccord mat-elevation-z0">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon aria-hidden="false" aria-label="Početna" style="margin-right: 15px;">verified</mat-icon>
+                <b>Brand</b>
+              </mat-panel-title>
+  
+            </mat-expansion-panel-header>
+            <ul style="list-style: none; padding:0">
+              <li *ngFor="let brand of brands">
+              <mat-checkbox>
+                <b>{{brand.brandName}}</b>
+              </mat-checkbox>
+              </li>
+            </ul>
+          </mat-expansion-panel>
+  
+        </mat-accordion>
+  
+  
+        <div class="center">
+          <button style="width: 95%;padding: 0.7em;" mat-flat-button color="primary">FILTER</button>
+        </div>
       </div>
+      <div class="admin" *ngIf="userService.userRole=='ADMIN'">
+        <a mat-list-item [routerLink]="'/'" [routerLinkActive]="'is-active'" [routerLinkActiveOptions]="{ exact: true }">
+          <mat-icon aria-hidden="false" aria-label="Početna" style="margin-right: 15px;">view_list</mat-icon>
+          <b>List of all products</b>
+        </a>
+        <a mat-list-item [routerLink]="'/'" [routerLinkActive]="'is-active'" [routerLinkActiveOptions]="{ exact: true }">
+          <mat-icon aria-hidden="false" aria-label="Početna" style="margin-right: 15px;">list_alt</mat-icon>
+          <b>List of all purchases</b>
+        </a>
+        <a mat-list-item [routerLink]="'/addProduct'" [routerLinkActive]="'is-active'" [routerLinkActiveOptions]="{ exact: true }">
+          <mat-icon aria-hidden="false" aria-label="Početna" style="margin-right: 15px;">add_circle</mat-icon>
+          <b>Add product</b>
+        </a>
+      </div>
+     
 
 
     </mat-nav-list>
